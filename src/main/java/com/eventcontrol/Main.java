@@ -5,8 +5,12 @@ package com.eventcontrol;
  */
 public final class Main {
 
+    /**
+     * Приватный конструктор для утилитарного класса.
+     */
     private Main() {
-        throw new UnsupportedOperationException("Utility class should not be instantiated");
+        throw new UnsupportedOperationException(
+                "Utility class should not be instantiated");
     }
 
     /**
@@ -14,34 +18,36 @@ public final class Main {
      *
      * @param args аргументы командной строки
      */
-    public static void main(String[] args) {
-        // 1. Создаём менеджер событий
-        EventManager manager = new EventManager();
+    public static void main(final String[] args) {
+        // Создаём менеджер событий
+        final EventManager manager = new EventManager();
 
-        // 2. Создаём сервис уведомлений
-        NotificationService notifier = new NotificationService();
+        // Создаём сервис уведомлений
+        final NotificationService notifier = new NotificationService();
 
-        // 3. Создаём события (используем улучшенный иммутабельный Event)
-        Event meeting = new Event("Встреча команды", "2026-07-15", "Обсуждение проекта");
-        Event interview = new Event("Собеседование", "2026-07-20", "Найм разработчика");
+        // Создаём события
+        final Event meeting = new Event("Встреча команды",
+                "2026-07-15", "Обсуждение проекта");
+        final Event interview = new Event("Собеседование",
+                "2026-07-20", "Найм разработчика");
 
-        // 4. Добавляем события через менеджер
+        // Добавляем события
         manager.addEvent(meeting);
         manager.addEvent(interview);
 
-        // 5. Отправляем уведомления
+        // Отправляем уведомления
         notifier.notifyEventCreated(meeting);
         notifier.notifyEventCreated(interview);
 
-        // 6. Поиск событий
+        // Поиск событий
         System.out.println("\nПоиск по слову 'команды':");
         manager.searchByTitle("команды").forEach(System.out::println);
 
-        // 7. Удаляем событие
+        // Удаляем событие
         manager.removeEvent(meeting);
         notifier.notifyEventDeleted(meeting);
 
-        // 8. Напоминание
+        // Напоминание
         notifier.sendReminder(interview);
     }
 }

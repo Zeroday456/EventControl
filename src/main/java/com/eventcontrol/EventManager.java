@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
  */
 public class EventManager {
 
+    /** Список всех событий. */
     private final List<Event> events = new ArrayList<>();
 
     /**
@@ -20,7 +21,7 @@ public class EventManager {
      * @param event событие для добавления
      * @throws IllegalArgumentException если событие null или невалидно
      */
-    public void addEvent(Event event) {
+    public void addEvent(final Event event) {
         if (event == null) {
             throw new IllegalArgumentException("Событие не может быть null");
         }
@@ -36,7 +37,7 @@ public class EventManager {
      * @param event событие для удаления
      * @return true, если событие было удалено, иначе false
      */
-    public boolean removeEvent(Event event) {
+    public boolean removeEvent(final Event event) {
         return event != null && events.remove(event);
     }
 
@@ -55,13 +56,14 @@ public class EventManager {
      * @param keyword ключевое слово для поиска (регистр не учитывается)
      * @return список найденных событий
      */
-    public List<Event> searchByTitle(String keyword) {
+    public List<Event> searchByTitle(final String keyword) {
         if (keyword == null || keyword.isEmpty()) {
             return getAllEvents();
         }
-        String lowerKeyword = keyword.toLowerCase();
+        final String lowerKeyword = keyword.toLowerCase();
         return events.stream()
-                .filter(event -> event.getTitle().toLowerCase().contains(lowerKeyword))
+                .filter(event -> event.getTitle().toLowerCase()
+                        .contains(lowerKeyword))
                 .collect(Collectors.toList());
     }
 

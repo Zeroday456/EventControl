@@ -10,11 +10,13 @@ public class NotificationService {
      *
      * @param event созданное событие
      */
-    public void notifyEventCreated(Event event) {
+    public void notifyEventCreated(final Event event) {
         if (event == null) {
             return;
         }
-        System.out.println("[УВЕДОМЛЕНИЕ] Создано событие: " + event.getTitle());
+        final String message = "[УВЕДОМЛЕНИЕ] Создано событие: "
+                + event.getTitle();
+        System.out.println(message);
     }
 
     /**
@@ -22,11 +24,13 @@ public class NotificationService {
      *
      * @param event удалённое событие
      */
-    public void notifyEventDeleted(Event event) {
+    public void notifyEventDeleted(final Event event) {
         if (event == null) {
             return;
         }
-        System.out.println("[УВЕДОМЛЕНИЕ] Удалено событие: " + event.getTitle());
+        final String message = "[УВЕДОМЛЕНИЕ] Удалено событие: "
+                + event.getTitle();
+        System.out.println(message);
     }
 
     /**
@@ -34,10 +38,12 @@ public class NotificationService {
      *
      * @param event событие для напоминания
      */
-    public void sendReminder(Event event) {
+    public void sendReminder(final Event event) {
         if (event == null) {
             return;
         }
-        System.out.println("[НАПОМИНАНИЕ] Напоминание о событии: " + event.getTitle() + " (" + event.getDate() + ")");
+        final String message = "[НАПОМИНАНИЕ] Напоминание о событии: "
+                + event.getTitle() + " (" + event.getDate() + ")";
+        System.out.println(message);
     }
 }
