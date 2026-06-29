@@ -1,1 +1,1 @@
-"Изменение в main" 
+"Изменение в conflict-branch" 
