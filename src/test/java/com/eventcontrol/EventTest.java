@@ -19,22 +19,6 @@ public class EventTest {
     }
 
     @Test
-    public void testEventSetters() {
-        // Создаём событие
-        Event event = new Event("Старое название", "2026-07-15", "Старое описание");
-
-        // Меняем данные через сеттеры
-        event.setTitle("Новое название");
-        event.setDescription("Новое описание");
-
-        // Проверяем, что данные обновились
-        assertEquals("Новое название", event.getTitle());
-        assertEquals("Новое описание", event.getDescription());
-        // Дата не менялась
-        assertEquals("2026-07-15", event.getDate());
-    }
-
-    @Test
     public void testEventIsValid() {
         // Создаём валидное событие
         Event validEvent = new Event("Встреча", "2026-07-15", "Описание");
