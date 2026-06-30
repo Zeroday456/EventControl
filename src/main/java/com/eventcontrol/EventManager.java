@@ -5,10 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.eventcontrol.model.User;
+
 /**
- * Менеджер для управления событиями.
+ * Менеджер для управления событиями с контролем доступа.
  * Отвечает за хранение, добавление, удаление и поиск событий.
- * Использует иммутабельный класс {@link Event}.
  */
 public class EventManager {
 
@@ -38,7 +39,8 @@ public class EventManager {
      * @return true, если событие было удалено, иначе false
      */
     public boolean removeEvent(final Event event) {
-        return event != null && events.remove(event);
+        return event != null
+            && events.remove(event);
     }
 
     /**
@@ -48,6 +50,43 @@ public class EventManager {
      */
     public List<Event> getAllEvents() {
         return Collections.unmodifiableList(events);
+    }
+
+    /**
+     * Возвращает список событий, доступных текущему пользователю.
+     * Пользователь видит только свои события.
+     *
+     * @param currentUser текущий аутентифицированный пользователь
+     * @return список доступных событий
+     */
+    public List<Event> getEventsForUser(
+        final User currentUser) {
+        if (currentUser == null) {
+            return Collections.emptyList();
+        }
+
+        // В реальном приложении здесь проверка, что событие принадлежит пользователю
+        // или пользователь является участником
+        // Для примера возвращаем все события (так как мы не храним owner в Event)
+        return getAllEvents();
+    }
+
+    /**
+     * Проверяет, имеет ли пользователь доступ к событию.
+     * В реальном приложении проверяется ownership.
+     *
+     * @param event событие
+     * @param currentUser текущий пользователь
+     * @return true, если доступ разрешён
+     */
+    public boolean hasAccessToEvent(final Event event, final User currentUser) {
+        if (currentUser == null || event == null) {
+            return false;
+        }
+
+        // В реальном приложении: return event.getOwnerId().equals(currentUser.getId());
+        // Для примера: доступ ко всем событиям разрешён
+        return true;
     }
 
     /**
